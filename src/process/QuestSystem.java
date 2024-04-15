@@ -26,4 +26,9 @@ public class QuestSystem<Quest> {
 	public boolean getQFinished() {
 		return finished;
 	}
+	
+	@Override
+	public String toString() {
+		return name+": "+desc;
+	}
 }
