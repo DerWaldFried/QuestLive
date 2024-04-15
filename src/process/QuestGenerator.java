@@ -13,8 +13,14 @@ public class QuestGenerator {
     public QuestGenerator() {
         allQuests = new ArrayList<>();
         random = new Random();
-        // Beispielquests hinzufügen
-        // ...
+        
+        // Fügen Sie hier weitere Quests hinzu
+        allQuests.add(new QuestSystem("Der verlorene Zauberstab", "Finde den verlorenen Zauberstab des Magiers.", false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung", "Befreie die Rüstung von ihrem Fluch.", false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung2", "Befreie die Rüstung von ihrem Fluch.", false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung3", "Befreie die Rüstung von ihrem Fluch.", false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung4", "Befreie die Rüstung von ihrem Fluch.", false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung5", "Befreie die Rüstung von ihrem Fluch.", false));
     }
 
     public Set<QuestSystem> generateDailyQuests() {
