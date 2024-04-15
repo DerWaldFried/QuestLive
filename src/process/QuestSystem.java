@@ -26,27 +26,4 @@ public class QuestSystem<Quest> {
 	public boolean getQFinished() {
 		return finished;
 	}
-
-	class QuestGenerator{
-		private List<Quest> allQuest;
-		private Random random;
-		
-		public QuestGenerator() {
-			allQuest = new ArrayList<>();
-			random = new Random();
-			
-			//Erster Eintrag
-			allQuest.add((Quest) new QuestSystem<Quest>("Stay Fresh", "Putze dir deine Zähne", false));
-		}
-		
-		public Set<Quest> generateDailyQuests() {
-	        Set<Quest> dailyQuests = new HashSet<>();
-	        while (dailyQuests.size() < 5) {
-	            int index = random.nextInt(allQuest.size());
-	            dailyQuests.add(allQuest.get(index));
-	        }
-	        return dailyQuests;
-	    }
-		
-	}
 }
