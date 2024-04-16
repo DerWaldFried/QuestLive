@@ -28,6 +28,6 @@ public class QuestSystem<Quest> {
 	
 	@Override
 	public String toString() {
-		return name+": "+desc+"|XP: "+xp;
+		return name+"→ "+desc+" XP: "+xp;
 	}
 }
