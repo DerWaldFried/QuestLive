@@ -15,15 +15,15 @@ public class QuestGenerator {
         random = new Random();
         
         // Fügen Sie hier weitere Quests hinzu
-        allQuests.add(new QuestSystem("10 Liegestützt", "", 10, false));
-        allQuests.add(new QuestSystem("Kaufe ein Wasser", "", 5, false));
-        allQuests.add(new QuestSystem("Spende 2 Euro", "", 2,false));
-        allQuests.add(new QuestSystem("Rede nicht. Handel!", "", 20,false));
-        allQuests.add(new QuestSystem("Kauf dir ein Obst/Gemüse", "", 20,false));
-        allQuests.add(new QuestSystem("Erledige Papierkram", "", 10,false));
-        allQuests.add(new QuestSystem("Mach 10 Hampelmänner", "", 10,false));
-        allQuests.add(new QuestSystem("Jogge 2km", "", 20,false));
-        allQuests.add(new QuestSystem("Entspanne zu einem Tee", "", 25,false));
+        allQuests.add(new QuestSystem("10 Liegestützt", "", 10, false, false));
+        allQuests.add(new QuestSystem("Kaufe ein Wasser", "", 5, false, false));
+        allQuests.add(new QuestSystem("Spende 2 Euro", "", 2, false, false));
+        allQuests.add(new QuestSystem("Rede nicht. Handel!", "", 20, false, false));
+        allQuests.add(new QuestSystem("Kauf dir ein Obst/Gemüse", "", 20, false, false));
+        allQuests.add(new QuestSystem("Erledige Papierkram", "", 10, false, false));
+        allQuests.add(new QuestSystem("Mach 10 Hampelmänner", "", 10, false, false));
+        allQuests.add(new QuestSystem("Jogge 2km", "", 20, false, false));
+        allQuests.add(new QuestSystem("Entspanne zu einem Tee", "", 25, false, false));
     }
 
     public Set<QuestSystem> generateDailyQuests() {
@@ -39,7 +39,7 @@ public class QuestGenerator {
              * Swing Ansicht bekommt einen InfoEintrag als Quest
              */
             System.out.println("Keine Quests verfügbar.");
-            allQuests.add(new QuestSystem("Der verflixte Fehler", "Melde den Fehler im Github.", 100, false));
+            allQuests.add(new QuestSystem("Der verflixte Fehler", "Melde den Fehler im Github.", 100, true, false));
         }
         return dailyQuests;
     }
