@@ -34,8 +34,12 @@ public class QuestGenerator {
                 dailyQuests.add(allQuests.get(index));
             }
         } else {
-            // Behandeln Sie den Fall, dass keine Quests verfügbar sind
+            /*
+             * Wenn keine Quest vorhanden sind, zeigen wir erstmal nur eine Information in der Konsole. Der Inhalt in der
+             * Swing Ansicht bekommt einen InfoEintrag als Quest
+             */
             System.out.println("Keine Quests verfügbar.");
+            allQuests.add(new QuestSystem("Der verflixte Fehler", "Melde den Fehler im Github.", 100, false));
         }
         return dailyQuests;
     }
