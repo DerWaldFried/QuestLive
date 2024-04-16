@@ -15,15 +15,15 @@ public class QuestGenerator {
         random = new Random();
         
         // Fügen Sie hier weitere Quests hinzu
-        allQuests.add(new QuestSystem("Der verlorene Zauberstab", "Finde den verlorenen Zauberstab des Magiers.", 10, false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung", "Befreie die Rüstung von ihrem Fluch.", 25, false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung2", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung3", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung4", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung5", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung6", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung7", "Befreie die Rüstung von ihrem Fluch.", 25,false));
-        allQuests.add(new QuestSystem("Die verfluchte Rüstung8", "Befreie die Rüstung von ihrem Fluch.", 25,false));
+        allQuests.add(new QuestSystem("10 Liegestützt", "", 10, false));
+        allQuests.add(new QuestSystem("Kaufe ein Wasser", "", 5, false));
+        allQuests.add(new QuestSystem("Spende 2 Euro", "", 2,false));
+        allQuests.add(new QuestSystem("Rede nicht. Handel!", "", 20,false));
+        allQuests.add(new QuestSystem("Kauf dir ein Obst/Gemüse", "", 20,false));
+        allQuests.add(new QuestSystem("Erledige Papierkram", "", 10,false));
+        allQuests.add(new QuestSystem("Mach 10 Hampelmänner", "", 10,false));
+        allQuests.add(new QuestSystem("Jogge 2km", "", 20,false));
+        allQuests.add(new QuestSystem("Entspanne zu einem Tee", "", 25,false));
     }
 
     public Set<QuestSystem> generateDailyQuests() {
