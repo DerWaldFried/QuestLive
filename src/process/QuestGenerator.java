@@ -21,12 +21,15 @@ public class QuestGenerator {
         allQuests.add(new QuestSystem("Die verfluchte Rüstung3", "Befreie die Rüstung von ihrem Fluch.", 25,false));
         allQuests.add(new QuestSystem("Die verfluchte Rüstung4", "Befreie die Rüstung von ihrem Fluch.", 25,false));
         allQuests.add(new QuestSystem("Die verfluchte Rüstung5", "Befreie die Rüstung von ihrem Fluch.", 25,false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung6", "Befreie die Rüstung von ihrem Fluch.", 25,false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung7", "Befreie die Rüstung von ihrem Fluch.", 25,false));
+        allQuests.add(new QuestSystem("Die verfluchte Rüstung8", "Befreie die Rüstung von ihrem Fluch.", 25,false));
     }
 
     public Set<QuestSystem> generateDailyQuests() {
         Set<QuestSystem> dailyQuests = new HashSet<>();
         if (allQuests.size() > 0) {
-            while (dailyQuests.size() < 5) {
+            while (dailyQuests.size() < 7) {
                 int index = random.nextInt(allQuests.size());
                 dailyQuests.add(allQuests.get(index));
             }
