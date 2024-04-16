@@ -1,12 +1,21 @@
 package process;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class QuestGenerator {
+public class QuestGenerator implements Serializable {
     private List<QuestSystem> allQuests;
     private Random random;
 
@@ -28,6 +37,25 @@ public class QuestGenerator {
 
     public Set<QuestSystem> generateDailyQuests() {
         Set<QuestSystem> dailyQuests = new HashSet<>();
+        File file = new File("dailyQ.txt");
+        
+        //Vorgang wenn die Datei vorhanden ist oder nicht vorhanden ist.
+        if(file.exists()){
+        	try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
+        		// Wenn die letzte Generierung weniger als 24 Stunden her ist, verwende ich die gespeicherten Quests.
+        		LocalDateTime lastGenerated = (LocalDateTime) ois.readObject();
+        		if(Duration.between(lastGenerated, LocalDateTime.now()).toHours() < 24) {
+        			dailyQuests = (Set<QuestSystem>) ois.readObject();
+        			return dailyQuests;
+        		}
+        		
+        	}catch(IOException | ClassNotFoundException e) {
+        		e.printStackTrace();
+        	}
+        }
+        //Vorgang Ende
+        
+        // Wenn die Liste der Quests nicht leer ist, generiere ich zufällig 7 tägliche Quests.
         if (allQuests.size() > 0) {
             while (dailyQuests.size() < 7) {
                 int index = random.nextInt(allQuests.size());
@@ -41,6 +69,15 @@ public class QuestGenerator {
             System.out.println("Keine Quests verfügbar.");
             allQuests.add(new QuestSystem("Der verflixte Fehler", "Melde den Fehler im Github.", 100, true, false));
         }
+        
+     // Ich speichere die generierten täglichen Quests in der Datei.
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(LocalDateTime.now());
+            oos.writeObject(dailyQuests);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         return dailyQuests;
     }
 }
