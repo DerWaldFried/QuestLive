@@ -1,6 +1,8 @@
 package windows;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import process.QuestGenerator;
 import process.QuestSystem;
@@ -10,6 +12,8 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Set;
 import java.util.Vector;
 
@@ -61,6 +65,18 @@ public class QuestFrame extends JFrame {
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      // Ich zentriere das Fenster auf dem Bildschirm.
      setLocationRelativeTo(null);
+     
+     questList.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+             if (e.getClickCount() == 2) {
+                 int index = questList.locationToIndex(e.getPoint());
+                 QuestSystem selectedQuest = questList.getModel().getElementAt(index);
+                 // Perform the desired action for the double-clicked entry
+                 selectedQuest.onDoubleClick();
+             }
+         }
+     });
  }
 }
 
