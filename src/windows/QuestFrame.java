@@ -8,6 +8,8 @@ import process.QuestSystem;
 //Ich importiere die benötigten Swing-Komponenten für die GUI.
 import javax.swing.*;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.util.Set;
 import java.util.Vector;
 
@@ -15,6 +17,10 @@ import java.util.Vector;
 public class QuestFrame extends JFrame {
  // Ich deklariere eine JList, die QuestSystem-Objekte halten wird.
  private JList<QuestSystem> questList;
+ // Ich deklariere 3 JButton der die Wege eröffnet
+ private JButton configbtn;
+ private JButton profilebtn;
+ private JButton infobtn;
  // Ich deklariere einen QuestGenerator, der für die Erzeugung der Quests zuständig ist.
  private QuestGenerator generator;
 
@@ -28,6 +34,25 @@ public class QuestFrame extends JFrame {
      questList = new JList<>(new Vector<>(todaysQuests));
      // Ich füge die JList in einen JScrollPane ein, damit sie scrollbar ist.
      add(new JScrollPane(questList));
+     
+     // Ich erstelle ein neues JPanel für die Buttons
+     JPanel buttonPanel = new JPanel();
+     // Ich setze das Layout des Panels auf FlowLayout, damit die Buttons nebeneinander angeordnet werden
+     buttonPanel.setLayout(new FlowLayout());
+     
+     // Generiere die JBUtton Komponenenten für den Panel
+     configbtn = new JButton("Einstellungen");
+     profilebtn = new JButton("Profil");
+     infobtn = new JButton("Informationen");
+     
+     // Ich füge die Buttons dem Panel hinzu
+     buttonPanel.add(configbtn);
+     buttonPanel.add(profilebtn);
+     buttonPanel.add(infobtn);
+
+     // Ich füge das Button-Panel unterhalb der JScrollPane hinzu
+     add(buttonPanel, BorderLayout.SOUTH);
+     
      // Ich setze den Titel des Fensters.
      setTitle("Tägliche Quests");
      // Ich setze die Größe des Fensters.
