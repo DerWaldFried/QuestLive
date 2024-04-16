@@ -4,7 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class QuestSystem<Quest> {
+public class QuestSystem {
 	private String name;
 	private String desc;
 	private int xp;
@@ -42,7 +42,7 @@ public class QuestSystem<Quest> {
 	
 	@Override
 	public String toString() {
-		return name+"→ "+desc+" XP: "+xp+" | Angenommen: "+accepted;
+		return name+"→ "+desc+" XP: "+xp+" | Angenommen: "+accepted+" | Erledigt: "+finished;
 	}
 
 	public void onDoubleClick() {
@@ -60,14 +60,57 @@ public class QuestSystem<Quest> {
             accepted = true;
             System.out.println("Quest angenommen?:"+getQAccepted());
         });
-
+        //Wenn Quest Angenommen, füge Erledigt Button hinzu
+        JButton finishButton = new JButton("Quest abgeben");
+        finishButton.addActionListener(e -> {
+            // Was passiert wenn Quest angenommen?
+            JOptionPane.showMessageDialog(null, "Quest abgegeben: " + getQName());
+            finished = true;
+            System.out.println("Quest abgegeben?:"+getQFinished());
+        });
+        
         // Nun Erstelle ich eine OptionPane mit dem Text und dem Annehmen-Button und binde ihn ein.
-        JOptionPane optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{acceptButton});
+        JOptionPane optionPane = null;
+        
+        
+        
+        if( accepted == true ) {
+        	optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{finishButton});        	
+        }
+        else {
+        	optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{acceptButton});        	
+        }
         JDialog dialog = optionPane.createDialog("Quest Details");
 
         // dialog sichtbar
         dialog.setVisible(true);
 		
+	}
+
+	public void itIsReady() {
+		
+		// Ich erstelle den Text für den Dialog
+        String message = "Name: " + getQName() + "\n" +
+                         "Beschreibung: " + getQDesc() + "\n" +
+                         "XP: " + getQXp()+"\n"+
+                         "Diese Quest wurde schon erledigt!";
+
+        // Erstelle einen Annehmen-Button und dazu passend den Action Listener
+        JButton acceptButton = new JButton("Ok");
+        acceptButton.addActionListener(e -> {
+            
+        });
+        
+        // Nun Erstelle ich eine OptionPane mit dem Text und dem Annehmen-Button und binde ihn ein.
+        JOptionPane optionPane = null;
+        
+        optionPane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{acceptButton});        	
+        	
+        JDialog dialog = optionPane.createDialog("Quest Details");
+
+        // dialog sichtbar
+        dialog.setVisible(true);
+        
 	}
 	
 	
