@@ -17,6 +17,15 @@ import java.awt.event.MouseEvent;
 import java.util.Set;
 import java.util.Vector;
 
+class JQuestList<E> extends JList<E> {
+	public JQuestList(final Vector<? extends E> listData) {
+		super(listData);
+		
+	     this.setCellRenderer(new CustomListCellRenderer((QuestSystem)listData.get(0)));
+	}
+}
+
+
 //Ich definiere eine Klasse QuestFrame, die von JFrame erbt, um ein Fenster zu erstellen.
 public class QuestFrame extends JFrame {
  // Ich deklariere eine JList, die QuestSystem-Objekte halten wird.
@@ -35,7 +44,7 @@ public class QuestFrame extends JFrame {
      // Ich rufe die Methode generateDailyQuests auf, um ein Set von Quests für den Tag zu erhalten.
      Set<QuestSystem> todaysQuests = generator.generateDailyQuests();
      // Ich initialisiere die JList mit den Quests, die in einen Vector umgewandelt wurden.
-     questList = new JList<>(new Vector<>(todaysQuests));
+     questList = new JQuestList<>(new Vector<>(todaysQuests));
      // Ich füge die JList in einen JScrollPane ein, damit sie scrollbar ist.
      add(new JScrollPane(questList));
      
@@ -66,14 +75,22 @@ public class QuestFrame extends JFrame {
      // Ich zentriere das Fenster auf dem Bildschirm.
      setLocationRelativeTo(null);
      
+     //AI Generated. Um Farbe in JList zu ändern.
+//     questList.setCellRenderer(new CustomListCellRenderer());
+     
      questList.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(MouseEvent e) {
              if (e.getClickCount() == 2) {
                  int index = questList.locationToIndex(e.getPoint());
                  QuestSystem selectedQuest = questList.getModel().getElementAt(index);
-                 // Perform the desired action for the double-clicked entry
-                 selectedQuest.onDoubleClick();
+                 // Doppelclick Reaktion
+                 if(selectedQuest.getQFinished() == true) {
+                	 selectedQuest.itIsReady();
+                 }else {
+                	 selectedQuest.onDoubleClick();
+                 }
+                 
              }
          }
      });
