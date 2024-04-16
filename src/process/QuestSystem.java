@@ -1,10 +1,12 @@
 package process;
 
+import java.io.Serializable;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class QuestSystem {
+public class QuestSystem implements Serializable{
 	private String name;
 	private String desc;
 	private int xp;
