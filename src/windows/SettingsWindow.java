@@ -1,7 +1,10 @@
 package windows;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -48,7 +51,7 @@ public class SettingsWindow {
         
         //Schaltfläche zum Speichern
         JButton saveConfigBTN = new JButton("Speichern");
-        saveConfigBTN.setPreferredSize(new Dimension(300, 40));
+        saveConfigBTN.setBounds(0, 0, 400, 40);
 
         //Einbinden ins Fenster
         settingsFrame.getContentPane().add(difficultyLabel);
@@ -59,6 +62,21 @@ public class SettingsWindow {
         settingsFrame.getContentPane().add(btnPanel);
         
         btnPanel.add(saveConfigBTN);
+        /*
+         * Button Klick Event
+         */
+        saveConfigBTN.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int difficulty = difficultySlider.getValue();
+		        Date time = (Date) timeSpinner.getValue();
+				
+			}
+		});       
+        /*
+         * Button Klick Event Ende
+         */
         
         settingsFrame.setLocationRelativeTo(null);
         settingsFrame.setVisible(true);
