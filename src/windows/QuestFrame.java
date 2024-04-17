@@ -12,6 +12,8 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
@@ -57,6 +59,15 @@ public class QuestFrame extends JFrame {
      configbtn = new JButton("Einstellungen");
      profilebtn = new JButton("Profil");
      infobtn = new JButton("Informationen");
+     
+     //ActionListener von Schaltflächen
+     configbtn.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             // Öffne das Einstellungsfenster, wenn der Button geklickt wird
+             new SettingsWindow();
+         }
+     });
      
      // Ich füge die Buttons dem Panel hinzu
      buttonPanel.add(configbtn);
