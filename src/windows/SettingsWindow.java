@@ -3,6 +3,7 @@ package windows;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,8 +16,13 @@ import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
+import process.FileSystem;
+
 public class SettingsWindow {
     public SettingsWindow() {
+    	File file = new File("config.txt");
+    	FileSystem filesystem = new FileSystem();
+    	
         // Ich erstelle das Einstellungsfenster
         JFrame settingsFrame = new JFrame("Einstellungen");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,6 +77,13 @@ public class SettingsWindow {
 			public void actionPerformed(ActionEvent e) {
 				int difficulty = difficultySlider.getValue();
 		        Date time = (Date) timeSpinner.getValue();
+		        
+		        if(filesystem.Filechecker(file)) {
+		        	
+		        }else {
+		        	System.out.println("Die Configdatei fehlt und wird nun angelegt");
+		        	filesystem.Filechecker(file);
+		        }
 				
 			}
 		});       
