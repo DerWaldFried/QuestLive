@@ -28,3 +28,4 @@ replay_pid*
 .settings/org.eclipse.jdt.core.prefs
 /bin/
 dailyQ.txt
+config.txt

@@ -60,16 +60,14 @@ public class QuestFrame extends JFrame {
      profilebtn = new JButton("Profil");
      infobtn = new JButton("Informationen");
      
-     /*
-      * Actions Listener von Schaltflächen
-      */
-     // Einstellungen Button
+     //ActionListener von Schaltflächen
      configbtn.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			new SettingsWindow();
-		}
-	});
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             // Öffne das Einstellungsfenster, wenn der Button geklickt wird
+             new SettingsWindow();
+         }
+     });
      
      // Ich füge die Buttons dem Panel hinzu
      buttonPanel.add(configbtn);
@@ -83,6 +81,7 @@ public class QuestFrame extends JFrame {
      setTitle("Tägliche Quests");
      // Ich setze die Größe des Fensters.
      setSize(400, 300);
+     setResizable(false);
      // Ich sorge dafür, dass das Programm beendet wird, wenn das Fenster geschlossen wird.
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      // Ich zentriere das Fenster auf dem Bildschirm.
