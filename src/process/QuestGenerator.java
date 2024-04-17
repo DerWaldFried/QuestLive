@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.StreamCorruptedException;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,6 +51,9 @@ public class QuestGenerator implements Serializable {
         			return dailyQuests;
         		}
         		
+        	}catch(StreamCorruptedException e) {
+        		System.out.println("Die Datei 'dailyQ.txt' wurde manuell verändert und kann nicht gelesen werden.");
+        		file.delete();
         	}catch(IOException | ClassNotFoundException e) {
         		e.printStackTrace();
         	}
