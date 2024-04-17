@@ -81,6 +81,7 @@ public class QuestFrame extends JFrame {
      setTitle("Tägliche Quests");
      // Ich setze die Größe des Fensters.
      setSize(400, 300);
+     setResizable(false);
      // Ich sorge dafür, dass das Programm beendet wird, wenn das Fenster geschlossen wird.
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      // Ich zentriere das Fenster auf dem Bildschirm.
