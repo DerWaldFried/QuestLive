@@ -1,10 +1,12 @@
 package process;
 
+import java.awt.Component;
 import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class QuestSystem implements Serializable{
 	private String name;
@@ -61,6 +63,9 @@ public class QuestSystem implements Serializable{
             JOptionPane.showMessageDialog(null, "Quest angenommen: " + getQName());
             accepted = true;
             System.out.println("Quest angenommen?:"+getQAccepted());
+         // Schließe den Dialog, nachdem der Button gedrückt wurde
+            JDialog dialog = (JDialog) SwingUtilities.getRoot((Component) e.getSource());
+            dialog.dispose();
         });
         //Wenn Quest Angenommen, füge Erledigt Button hinzu
         JButton finishButton = new JButton("Quest abgeben");
@@ -69,6 +74,9 @@ public class QuestSystem implements Serializable{
             JOptionPane.showMessageDialog(null, "Quest abgegeben: " + getQName());
             finished = true;
             System.out.println("Quest abgegeben?:"+getQFinished());
+            // Schließe den Dialog, nachdem der Button gedrückt wurde
+            JDialog dialog = (JDialog) SwingUtilities.getRoot((Component) e.getSource());
+            dialog.dispose();
         });
         
         // Nun Erstelle ich eine OptionPane mit dem Text und dem Annehmen-Button und binde ihn ein.
