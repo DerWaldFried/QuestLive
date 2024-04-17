@@ -90,7 +90,7 @@ public class SettingsWindow {
 		        	filesystem.Filechecker(file);
 		        	filesystem.writeFile(file, time, difficulty);
 		        }
-				
+		        settingsFrame.dispose();
 			}
 		});       
         /*
