@@ -1,11 +1,13 @@
 package windows;
 
+import java.awt.Dimension;
 import java.util.Calendar;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
@@ -16,8 +18,13 @@ public class SettingsWindow {
         JFrame settingsFrame = new JFrame("Einstellungen");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         settingsFrame.setSize(400, 200);
+        settingsFrame.setResizable(false);
         settingsFrame.getContentPane().setLayout(new BoxLayout(settingsFrame.getContentPane(),  BoxLayout.Y_AXIS));
 
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(null);
+        btnPanel.setSize(400, 40);
+        
         /*
          * Komponenten der Einstellungen
          */
@@ -40,7 +47,8 @@ public class SettingsWindow {
         standUpTimer.setLabelFor(timeSpinner);
         
         //Schaltfläche zum Speichern
-        JButton saveConfigBTN = new JButton("Speichern"); 
+        JButton saveConfigBTN = new JButton("Speichern");
+        saveConfigBTN.setPreferredSize(new Dimension(300, 40));
 
         //Einbinden ins Fenster
         settingsFrame.getContentPane().add(difficultyLabel);
@@ -48,8 +56,12 @@ public class SettingsWindow {
         settingsFrame.getContentPane().add(standUpTimer);
         settingsFrame.getContentPane().add(timeSpinner);
         settingsFrame.getContentPane().add(standUPMin);
-        settingsFrame.add(saveConfigBTN);
+        settingsFrame.getContentPane().add(btnPanel);
+        
+        btnPanel.add(saveConfigBTN);
+        
         settingsFrame.setLocationRelativeTo(null);
         settingsFrame.setVisible(true);
+        
     }
 }
