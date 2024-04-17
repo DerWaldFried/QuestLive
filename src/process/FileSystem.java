@@ -15,6 +15,7 @@ public class FileSystem {
 				checkup = true;
 			}else {
 				checkup = false;
+				createFileConfig(file);
 			}
 		
 		return checkup;
