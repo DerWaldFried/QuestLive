@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -79,10 +80,15 @@ public class SettingsWindow {
 		        Date time = (Date) timeSpinner.getValue();
 		        
 		        if(filesystem.Filechecker(file)) {
+		        	System.out.println("Configdatei ist vorhanden.");
+		        	
+		        	//Methode zum beschreiben der Datei
+		        	filesystem.writeFile(file, time, difficulty);
 		        	
 		        }else {
 		        	System.out.println("Die Configdatei fehlt und wird nun angelegt");
 		        	filesystem.Filechecker(file);
+		        	filesystem.writeFile(file, time, difficulty);
 		        }
 				
 			}
