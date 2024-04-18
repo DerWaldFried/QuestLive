@@ -1,8 +1,9 @@
 package process;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class ExperiencePoints {
+public class ExperiencePoints implements Serializable{
 	File file = new File("profile.txt");
 	FileSystem fileSystem = new FileSystem();
 	
@@ -10,8 +11,10 @@ public class ExperiencePoints {
 	public int readyQ(int xp) {
 		int xpcheck = xp;
 		
+		checkFunc(file);
+		
 		if(fileSystem.Filechecker(file)) {
-			fileSystem.writeFirstIntLine(file, 0,xp);
+			fileSystem.writeFirstIntLine(file, xp);
 			checkXPtoLevel();
 		}else {
 			System.out.println("Es gibt ein Problem mit dem Lesen oder finden der Datei.");
@@ -31,5 +34,16 @@ public class ExperiencePoints {
     	}
     	
     	fileSystem.writeFile(file, xp, level);
+	}
+	
+	private void checkFunc(File file) {
+		if(fileSystem.Filechecker(file)) {
+        	System.out.println("Configdatei ist vorhanden.");
+        	
+        }else {
+        	System.out.println("Die Konfiguration für das Profile ist nicht da.");
+        	System.out.println("Bitte wende die an den Support. Wenn es nach einem Neustart nicht funktioniert.");
+        	fileSystem.writeFile(file, 0,1);
+        }
 	}
 }
