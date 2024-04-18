@@ -85,65 +85,65 @@ public class FileSystem {
 	}
 	
 	public int[] loadProfile(File file) {
-		int[] returner = new int[2];
-		try {
-            BufferedReader reader = new BufferedReader(new FileReader(working_dir+"/"+file));
-            String XPStr = reader.readLine();
-            String LevelStr = reader.readLine();
-            reader.close();
+	    int[] returner = new int[2];
+	    try {
+	        BufferedReader reader = new BufferedReader(new FileReader(working_dir + "\\" + file));
 
-            if(XPStr != null)
-            	returner[0] = Integer.parseInt(XPStr);
-            
-            if(LevelStr != null)
-            	returner[1] = Integer.parseInt(LevelStr);
-            
-        } catch (IOException e) {
-        	// Wenn das laden nicht funktioniert
-            e.printStackTrace();
-        }
-		return returner;
+	        // Lese die erste Zeile und speichere den Wert in XPStr
+	        String XPStr = reader.readLine();
+	        // Lese die zweite Zeile und speichere den Wert in LevelStr
+	        String LevelStr = reader.readLine();
+	        
+	        reader.close();
+
+	        if (XPStr != null)
+	            returner[0] = Integer.parseInt(XPStr);
+
+	        if (LevelStr != null)
+	            returner[1] = Integer.parseInt(LevelStr);
+
+	    } catch (IOException e) {
+	        // Wenn das Laden nicht funktioniert
+	        e.printStackTrace();
+	    }
+	    return returner;
 	}
 	
 	public void writeFirstIntLine(File file, int newLine) {
-		try {
-            // Erstelle einen BufferedReader zum Lesen der Datei
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+	    try {
+	        // Erstelle einen BufferedReader zum Lesen der Datei
+	        BufferedReader reader = new BufferedReader(new FileReader(file));
+	        // Lese die erste Zeile
+	        String firstLine = reader.readLine();
+	        // Lese die zweite Zeile
+	        String secondLine = reader.readLine();
+	        // Schließe den Reader
+	        reader.close();
 
-            // Lese die erste Zeile
-            String firstLine = reader.readLine();
-
-            // Lese die zweite Zeile
-            String secondLine = reader.readLine();
-
-            // Schließe den Reader
-            
-
-            // Erstelle einen BufferedWriter zum Schreiben in die Datei
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-
-            int[] returner = loadProfile(file);
-            // Schreibe d22+ie neue erste Zeile
-            writer.write(""+(returner[0]+newLine));
-            writer.newLine();
-
-            // Schreibe die unveränderte zweite Zeile
-            if(secondLine != null)
-            	writer.write(secondLine);
-            writer.newLine();
-
-            // Schreibe den Rest der Originaldatei
-            String line;
-            while ((line = reader.readLine()) != null) {
-                writer.write(line);
-                writer.newLine();
-            }
-
-            reader.close();
-            // Schließe den Writer
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	        // Erstelle einen BufferedWriter zum Schreiben in die Datei
+	        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+	        // Schreibe die neue erste Zeile
+	        writer.write("" + (Integer.parseInt(firstLine) + newLine));
+	        writer.newLine();
+	        // Schreibe die unveränderte zweite Zeile
+	        if (secondLine != null) {
+	            writer.write(secondLine);
+	            writer.newLine();
+	        }
+	        // Schreibe den Rest der Originaldatei, beginnend von der dritten Zeile
+	        reader = new BufferedReader(new FileReader(file)); // Öffne den Reader erneut
+	        reader.readLine(); // Überspringe die ersten beiden Zeilen
+	        reader.readLine();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            writer.write(line);
+	            writer.newLine();
+	        }
+	        // Schließe den Reader und den Writer
+	        reader.close();
+	        writer.close();
+	    } catch (IOException | NumberFormatException e) {
+	        e.printStackTrace();
+	    }
+	}
 }
