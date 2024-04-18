@@ -1,5 +1,6 @@
 package windows;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,6 +15,8 @@ import javax.swing.JProgressBar;
 import process.FileSystem;
 
 public class ProfileWindow {
+	int fontSize = 25;
+	
 	public ProfileWindow() {
     	File file = new File("profile.txt");
     	FileSystem filesystem = new FileSystem();
@@ -40,9 +43,11 @@ public class ProfileWindow {
         xpProgressBar = new JProgressBar();
         xpProgressBar.setStringPainted(true); // Zeige den Text an
         xpProgressBar.setMinimum(0); // Mindestwert für XP
-        xpProgressBar.setMaximum(100); // Maximalwert für XP
+        xpProgressBar.setMaximum(150); // Maximalwert für XP
         XPLabel.setLabelFor(xpProgressBar);
         
+        JLabel lvlLabel = new JLabel("Dein aktuelles Level:");
+        JLabel lvlViewLbl = new JLabel();
         //Schaltfläche zum Speichern
         JButton saveConfigBTN = new JButton("Ok");
         saveConfigBTN.setBounds(0, 0, 400, 40);
@@ -56,6 +61,11 @@ public class ProfileWindow {
             	//Methode zum beschreiben der Datei
             	int[] returner = filesystem.loadProfile(file);
             	xpProgressBar.setValue(returner[0]);
+            	lvlViewLbl.setText(""+returner[1]);
+            	
+            	Font oldFont = lvlViewLbl.getFont();
+            	Font newFont = new Font(oldFont.getName(), oldFont.getStyle(), fontSize);
+            	lvlViewLbl.setFont(newFont);
             	
             }else {
             	System.out.println("Die Konfiguration für das Profile ist nicht da.");
@@ -69,6 +79,8 @@ public class ProfileWindow {
         //Einbinden ins Fenster
         profileFrame.getContentPane().add(XPLabel);
         profileFrame.getContentPane().add(xpProgressBar);
+        profileFrame.getContentPane().add(lvlLabel);
+        profileFrame.getContentPane().add(lvlViewLbl);
         profileFrame.getContentPane().add(btnPanel);
         
         btnPanel.add(saveConfigBTN);
