@@ -14,7 +14,7 @@ public class ExperiencePoints implements Serializable{
 		checkFunc(file);
 		
 		if(fileSystem.Filechecker(file)) {
-			fileSystem.writeFirstIntLine(file, xp);
+			fileSystem.writeFirstIntLine(file, xpcheck);
 			checkXPtoLevel();
 		}else {
 			System.out.println("Es gibt ein Problem mit dem Lesen oder finden der Datei.");
