@@ -29,7 +29,7 @@ public class ExperiencePoints implements Serializable{
 		int xp = returner[0];
     	int level = returner[1];
     	
-    	if(xp>1000) {
+    	if(xp>150) {
     		level += 1;
     	}
     	
