@@ -9,11 +9,16 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class QuestSystem implements Serializable{
+	/**
+	 * 
+	 */
 	private String name;
 	private String desc;
 	private int xp;
 	private boolean accepted;
 	private boolean finished;
+	
+	transient ExperiencePoints xpPoints = new ExperiencePoints();
 	
 	public QuestSystem(String name, String desc, int xp, boolean accepted, boolean finished) {
 		this.name = name;
@@ -74,7 +79,9 @@ public class QuestSystem implements Serializable{
             JOptionPane.showMessageDialog(null, "Quest abgegeben: " + getQName());
             finished = true;
             System.out.println("Quest abgegeben?:"+getQFinished());
+            xpPoints = new ExperiencePoints();
             // Schließe den Dialog, nachdem der Button gedrückt wurde
+            xpPoints.readyQ(getQXp());
             JDialog dialog = (JDialog) SwingUtilities.getRoot((Component) e.getSource());
             dialog.dispose();
         });
