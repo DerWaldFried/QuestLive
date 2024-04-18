@@ -68,6 +68,14 @@ public class QuestFrame extends JFrame {
              new SettingsWindow();
          }
      });
+     profilebtn.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new ProfileWindow();
+			
+		}
+	});
      
      // Ich füge die Buttons dem Panel hinzu
      buttonPanel.add(configbtn);
