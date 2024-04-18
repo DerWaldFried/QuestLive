@@ -2,6 +2,7 @@ package process;
 
 import java.beans.Expression;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -47,36 +48,6 @@ public class FileSystem {
 		    }
 	}
 	
-	public void writeFirstIntLine(File file,int dpos, int newLine) {
-        try {
-        	// Erstelle einen RandomAccessFile im "read-write"-Modus
-            RandomAccessFile raf = new RandomAccessFile(file, "rw");
-
-            // Lese die Länge der ersten Zeile
-            long firstLineLength = raf.readLine().length();
-
-            // Positioniere den Dateizeiger am Anfang der Datei
-            raf.seek(dpos);
-
-            // Konvertiere den int-Wert in einen String
-            String newFirstLine = String.valueOf(newLine);
-
-            // Schreibe die neue erste Zeile
-            raf.writeBytes(newFirstLine);
-
-            // Überschreibe den Rest der ersten Zeile mit Leerzeichen,
-            // um sicherzustellen, dass alte Zeichen gelöscht werden
-            for (int i = newFirstLine.length(); i < firstLineLength; i++) {
-                raf.writeByte(' ');
-            }
-
-            // Schließe den RandomAccessFile
-            raf.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
 	public void writeFile(File file, Object... values) {
 		
 		try {
@@ -121,8 +92,11 @@ public class FileSystem {
             String LevelStr = reader.readLine();
             reader.close();
 
-            returner[0] = Integer.parseInt(XPStr);
-            returner[1] = Integer.parseInt(LevelStr);
+            if(XPStr != null)
+            	returner[0] = Integer.parseInt(XPStr);
+            
+            if(LevelStr != null)
+            	returner[1] = Integer.parseInt(LevelStr);
             
         } catch (IOException e) {
         	// Wenn das laden nicht funktioniert
@@ -131,4 +105,45 @@ public class FileSystem {
 		return returner;
 	}
 	
+	public void writeFirstIntLine(File file, int newLine) {
+		try {
+            // Erstelle einen BufferedReader zum Lesen der Datei
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            // Lese die erste Zeile
+            String firstLine = reader.readLine();
+
+            // Lese die zweite Zeile
+            String secondLine = reader.readLine();
+
+            // Schließe den Reader
+            
+
+            // Erstelle einen BufferedWriter zum Schreiben in die Datei
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            int[] returner = loadProfile(file);
+            // Schreibe d22+ie neue erste Zeile
+            writer.write(""+(returner[0]+newLine));
+            writer.newLine();
+
+            // Schreibe die unveränderte zweite Zeile
+            if(secondLine != null)
+            	writer.write(secondLine);
+            writer.newLine();
+
+            // Schreibe den Rest der Originaldatei
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
+
+            reader.close();
+            // Schließe den Writer
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
