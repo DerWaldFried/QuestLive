@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +47,36 @@ public class FileSystem {
 		    }
 	}
 	
+	public void writeFirstIntLine(File file,int dpos, int newLine) {
+        try {
+        	// Erstelle einen RandomAccessFile im "read-write"-Modus
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+
+            // Lese die Länge der ersten Zeile
+            long firstLineLength = raf.readLine().length();
+
+            // Positioniere den Dateizeiger am Anfang der Datei
+            raf.seek(dpos);
+
+            // Konvertiere den int-Wert in einen String
+            String newFirstLine = String.valueOf(newLine);
+
+            // Schreibe die neue erste Zeile
+            raf.writeBytes(newFirstLine);
+
+            // Überschreibe den Rest der ersten Zeile mit Leerzeichen,
+            // um sicherzustellen, dass alte Zeichen gelöscht werden
+            for (int i = newFirstLine.length(); i < firstLineLength; i++) {
+                raf.writeByte(' ');
+            }
+
+            // Schließe den RandomAccessFile
+            raf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	public void writeFile(File file, Object... values) {
 		
 		try {
@@ -80,6 +111,24 @@ public class FileSystem {
 			// Wenn Parse nicht funktioniert
 			e.printStackTrace();
 		}
+	}
+	
+	public int[] loadProfile(File file) {
+		int[] returner = new int[2];
+		try {
+            BufferedReader reader = new BufferedReader(new FileReader(working_dir+"/"+file));
+            String XPStr = reader.readLine();
+            String LevelStr = reader.readLine();
+            reader.close();
+
+            returner[0] = Integer.parseInt(XPStr);
+            returner[1] = Integer.parseInt(LevelStr);
+            
+        } catch (IOException e) {
+        	// Wenn das laden nicht funktioniert
+            e.printStackTrace();
+        }
+		return returner;
 	}
 	
 }
