@@ -27,7 +27,6 @@ class JQuestList<E> extends JList<E> {
 	}
 }
 
-
 //Ich definiere eine Klasse QuestFrame, die von JFrame erbt, um ein Fenster zu erstellen.
 public class QuestFrame extends JFrame {
  // Ich deklariere eine JList, die QuestSystem-Objekte halten wird.
@@ -77,6 +76,15 @@ public class QuestFrame extends JFrame {
 		}
 	});
      
+     infobtn.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			new InfoWindow();
+			
+		}
+	});
+     
      // Ich füge die Buttons dem Panel hinzu
      buttonPanel.add(configbtn);
      buttonPanel.add(profilebtn);
@@ -96,7 +104,8 @@ public class QuestFrame extends JFrame {
      setLocationRelativeTo(null);
      
      //AI Generated. Um Farbe in JList zu ändern.
-//     questList.setCellRenderer(new CustomListCellRenderer());
+     //Deaktiviert weil Probleme bei Ausführung
+     //questList.setCellRenderer(new CustomListCellRenderer());
      
      questList.addMouseListener(new MouseAdapter() {
          @Override
