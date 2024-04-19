@@ -17,8 +17,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import pluginsystem.QuestLoader;
+import windows.SettingsWindow;
+
 public class QuestGenerator implements Serializable {
-    private List<QuestSystem> allQuests;
+    private ArrayList<QuestSystem> allQuests;
     private Random random;
 
     public QuestGenerator() {
@@ -35,6 +38,13 @@ public class QuestGenerator implements Serializable {
         allQuests.add(new QuestSystem("Mach 10 Hampelmänner", "", 10, false, false));
         allQuests.add(new QuestSystem("Jogge 2km", "", 20, false, false));
         allQuests.add(new QuestSystem("Entspanne zu einem Tee", "", 25, false, false));
+        
+        //Lade alle Quest aus Settings
+        List<QuestSystem> newQuests = QuestLoader.getNewQuests();
+        if(newQuests != null)
+        	allQuests.addAll(newQuests);
+        
+        System.out.println(allQuests);
     }
 
     public Set<QuestSystem> generateDailyQuests() {
@@ -62,7 +72,7 @@ public class QuestGenerator implements Serializable {
         
         // Wenn die Liste der Quests nicht leer ist, generiere ich zufällig 7 tägliche Quests.
         if (allQuests.size() > 0) {
-            while (dailyQuests.size() < 7) {
+            while (dailyQuests.size() < 5) {
                 int index = random.nextInt(allQuests.size());
                 dailyQuests.add(allQuests.get(index));
             }
