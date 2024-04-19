@@ -43,6 +43,7 @@ public class ExperiencePoints implements Serializable{
         }else {
         	System.out.println("Die Konfiguration für das Profile ist nicht da.");
         	System.out.println("Bitte wende die an den Support. Wenn es nach einem Neustart nicht funktioniert.");
+        	System.out.println("info@patrick-b.biz");
         	fileSystem.writeFile(file, 0,1);
         }
 	}
