@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-public class QuestSystem implements Serializable{
+public class QuestSystem extends AbstractQuest implements Serializable{
 	/**
 	 * 
 	 */
@@ -21,6 +21,7 @@ public class QuestSystem implements Serializable{
 	transient ExperiencePoints xpPoints = new ExperiencePoints();
 	
 	public QuestSystem(String name, String desc, int xp, boolean accepted, boolean finished) {
+		super(name, desc, xp, accepted, finished);
 		this.name = name;
 		this.desc = desc;
 		this.xp = xp;
