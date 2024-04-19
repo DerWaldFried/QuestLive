@@ -34,7 +34,7 @@ public class SettingsWindow {
         // Ich erstelle das Einstellungsfenster
         JFrame settingsFrame = new JFrame("Einstellungen");
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        settingsFrame.setSize(400, 250);
+        settingsFrame.setSize(400, 350);
         settingsFrame.setResizable(false);
         settingsFrame.getContentPane().setLayout(new BoxLayout(settingsFrame.getContentPane(),  BoxLayout.Y_AXIS));
 
@@ -81,8 +81,8 @@ public class SettingsWindow {
         	qDesc = new JTextField();
         	qDesc.setBounds(200, 20, 300, 20);
         	
-        	JButton sQuestBTN = new JButton();
-        	sQuestBTN.setBounds(0, 30, 0, 10);
+        	JButton sQuestBTN = new JButton("Hinzufügen");
+        	sQuestBTN.setBounds(0, 40, 400, 25);
         	sQuestBTN.addActionListener(new ActionListener() {
 				
 				@Override
@@ -116,6 +116,7 @@ public class SettingsWindow {
         questCPanel.add(qName);
         questCPanel.add(qDesc);
         questCPanel.add(qDescLbl);
+        questCPanel.add(sQuestBTN);
         
         btnPanel.add(saveConfigBTN);
         /*
@@ -151,14 +152,14 @@ public class SettingsWindow {
         
     }
 
-    public List<QuestSystem> getNewQuests() {
-        List<QuestSystem> newQuests = new ArrayList<>();
-        String name = qName.getText();
-        String description = qDesc.getText();
-        if (!name.isEmpty() && !description.isEmpty()) {
-            QuestSystem quest = new QuestSystem(name, description, 20, false, false);
-            newQuests.add(quest);
-        }
-        return newQuests;
-    }
+//    public List<QuestSystem> getNewQuests() {
+//        List<QuestSystem> newQuests = new ArrayList<>();
+//        String name = qName.getText();
+//        String description = qDesc.getText();
+//        if (!name.isEmpty() && !description.isEmpty()) {
+//            QuestSystem quest = new QuestSystem(name, description, 20, false, false);
+//            newQuests.add(quest);
+//        }
+//        return newQuests;
+//    }
 }
