@@ -18,7 +18,6 @@ import java.util.Random;
 import java.util.Set;
 
 import pluginsystem.QuestLoader;
-import windows.SettingsWindow;
 
 public class QuestGenerator implements Serializable {
     private ArrayList<QuestSystem> allQuests;
